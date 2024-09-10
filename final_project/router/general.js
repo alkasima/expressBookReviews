@@ -23,9 +23,17 @@ public_users.post("/register", (req,res) => {
 });
 
 // Get the book list available in the shop
-public_users.get('/',function (req, res) {
+public_users.get('/', async function (req, res) {
+  try {
   
-  res.json(books);
+    const booksData = books;
+
+    res.json(booksData);
+
+  } catch (error) {
+    console.error('Error fetching books:', error);
+    res.status(500).json({ message: 'Error fetching books' });
+  }
   
 });
 

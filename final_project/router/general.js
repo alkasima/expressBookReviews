@@ -77,8 +77,9 @@ public_users.get('/author/:author', async function (req, res) {
 });
 
 // Get all books based on title
-public_users.get('/title/:title',function (req, res) {
+public_users.get('/title/:title', async function (req, res) {
 
+  try {
     const titleName = req.params.title.toLowerCase();
 
     const bookList = Object.values(books);
@@ -90,6 +91,9 @@ public_users.get('/title/:title',function (req, res) {
     }else {
       res.status(404).json({message: "Book with this title not found"});
     }
+  }catch {
+    res.status(500).json({message: 'Error fetching books'});
+  }
 
 });
 
